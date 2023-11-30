@@ -1,0 +1,64 @@
+/* Create.ejs */
+.image-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Ajusta el espacio entre las imágenes según sea necesario */
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-label img {
+    width: 100px; /* o el tamaño que prefieras */
+    height: 100px; /* o el tamaño que prefieras */
+    border-radius: 50%; /* si deseas que las imágenes sean circulares */
+    object-fit: cover;
+}
+
+/* Oculta visualmente el input radio pero lo mantiene accesible */
+.radio-label input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.radio-label img {
+    transition: transform 0.3s ease;
+}
+
+/* Agrega una transformación al hacer hover sobre la imagen para darle un efecto visual */
+.radio-label:hover img {
+    transform: scale(1.1);
+}
+
+/* Estilos para centrar el formulario en la página */
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    min-height: 100vh; /* Asegura que el contenedor sea al menos del alto de la ventana */
+    padding: 20px;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 500px; /* O el ancho máximo que prefieras para tu formulario */
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajusta el tamaño de las imágenes para que se ajusten al contenedor */
+.image-selection label img {
+    width: auto;
+    height: 80px; /* Ajusta la altura para controlar el tamaño de las imágenes */
+}
+
+/* Asegúrate de que los botones de radio estén alineados correctamente */
+.radio-label {
+    margin: 10px 0;
+}

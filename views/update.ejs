@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Contacto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-wrapper {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="radio"],
+        button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        .image-selection {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .radio-label img {
+            width: 80px; /* Ajusta este valor según prefieras */
+            height: 80px; /* Ajusta este valor según prefieras */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .error-message {
+            color: #d9534f;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <h1>Actualizar Contacto</h1>
+            <% if(typeof error !== 'undefined') { %>
+                <p class="error-message">Error al actualizar el contacto: <%= error %></p>
+            <% } %>
+            <form action="/<%= contact._id %>?_method=PUT" method="post">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" value="<%= contact.nombres %>" required>
+        
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" value="<%= contact.apellidos %>" required>
+        
+                <label for="numeroCelular">Número de Celular:</label>
+                <input type="text" id="numeroCelular" name="numeroCelular" value="<%= contact.numeroCelular %>" required>
+        
+                <label for="correoElectronico">Correo Electrónico:</label>
+                <input type="email" id="correoElectronico" name="correoElectronico" value="<%= contact.correoElectronico %>" required>
+        
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <% if(contact.fechaNacimiento) { %>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<%= new Date(contact.fechaNacimiento).toISOString().split('T')[0] %>" required>
+                <% } else { %>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                <% } %>
+
+                <div class="image-selection">
+                    <% assets.forEach(function(imageName) { %>
+                        <label class="radio-label">
+                            <input type="radio" name="foto" value="<%= imageName %>"
+                                <%= contact.foto === imageName ? 'checked' : '' %> required>
+                            <img src="/<%= imageName %>" alt="Foto de perfil">
+                        </label>
+                    <% }); %>
+                </div>
+
+                <button type="submit">Actualizar Contacto</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

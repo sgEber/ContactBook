@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Contactos</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Contactos</h1>
+        <a href="/create"><button class="btn btn-primary">Agregar Nuevo Contacto</button></a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Número de Celular</th>
+                    <th>Correo Electrónico</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(contacts.length > 0) { %>
+                    <% contacts.forEach(function(contact) { %>
+                        <tr>
+                            <td>
+                                <% if(contact.foto) { %>
+                                    <img src="/<%= contact.foto %>" alt="Foto de perfil" class="profile-pic">
+                                <% } else { %>
+                                    <img src="/default-profile.png" alt="Foto por defecto" class="profile-pic">
+                                <% } %>
+                            </td>
+                            <td><%= contact.nombres %></td>
+                            <td><%= contact.apellidos %></td>
+                            <td><%= contact.numeroCelular %></td>
+                            <td><%= contact.correoElectronico %></td>
+                            <td><%= contact.fechaNacimiento.toDateString() %></td>
+                            <td class="actions">
+                                <a href="/<%= contact._id %>/edit"><button class="btn btn-success">Actualizar</button></a>
+                                <form action="/<%= contact._id %>?_method=DELETE" method="post">
+                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="7">No hay contactos para mostrar.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <!-- Aquí puedes agregar la paginación si es necesario -->
+    </div>
+</body>
+</html>
