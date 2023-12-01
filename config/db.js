@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://127.0.0.1:27017/TecsupDB'
+const dbURI = 'mongodb://18.224.72.116:27017/TecsupDB'
 
 const connectDB = async () => {
     try {
